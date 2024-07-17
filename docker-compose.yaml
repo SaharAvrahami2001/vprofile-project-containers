@@ -7,6 +7,8 @@ services:
     build: db/
     ports:
     - 3306:3306
+    volumes:
+    - dbdatavolume:/var/lib/mysql
   mc01:
     image: memcached
     ports:
@@ -19,3 +21,5 @@ services:
     build: web/
     ports:
       - "80:80"
+volumes:
+  dbdatavolume:
