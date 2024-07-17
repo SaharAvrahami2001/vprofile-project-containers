@@ -2,4 +2,4 @@ FROM mysql:8.0.33
 ENV MYSQL_DATABASE=accounts
 ENV MYSQL_ROOT_PASSWORD=admin123
 
-ADD db_buckup.sql /docker-entrypoint-initdb.d
+ADD db_backup.sql /docker-entrypoint-initdb.d
