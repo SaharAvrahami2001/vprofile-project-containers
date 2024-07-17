@@ -1,0 +1,21 @@
+services:
+  app:
+    build: app/
+    ports: 
+    - 8080:8080
+  db01:
+    build: db/
+    ports:
+    - 3306:3306
+  mc01:
+    image: memcached
+    ports:
+    - 11211:11211
+  rmq01:
+    image: rabbitmq
+    ports:
+    - 15672:15672
+  web:
+    build: web/
+    ports:
+      - "80:80"
