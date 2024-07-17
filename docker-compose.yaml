@@ -21,5 +21,8 @@ services:
     build: web/
     ports:
       - "80:80"
+    volumes:
+      - webdatavolume:/templates:/etc/nginx/templates
 volumes:
   dbdatavolume:
+  webdatavolume:
