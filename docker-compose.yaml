@@ -1,10 +1,12 @@
 services:
   app:
-    build: app/
+    build: 
+      context: app/
     ports: 
     - "8080:8080"
   db01:
-    build: db/
+    build: 
+       context: db/
     ports:
     - "3306:3306"
     volumes:
@@ -18,7 +20,8 @@ services:
     ports:
     - "15672:15672"
   web:
-    build: web/
+    build: 
+      context: web/
     ports:
       - "80:80"
     volumes:
