@@ -1,31 +1,49 @@
 services:
   app:
     build: 
-      context: app/
+      context: ./app
+    image: kubesahar/vproapp
+    container_name: vproapp
     ports: 
     - "8080:8080"
-  db01:
+    volumes:
+      - vproappdata:/usr/local/tomcat/webapps
+
+  mysqlDB:
     build: 
-       context: db/
+       context: ./db
+    image: kubesahar/vprodb
+    container_name: db01
     ports:
     - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin123
     volumes:
     - dbdatavolume:/var/lib/mysql
-  mc01:
+
+  memcached:
     image: memcached
+    container_name: mc01
     ports:
     - "11211:11211"
-  rmq01:
+
+  rabbitMQ:
     image: rabbitmq
+    container_name: rmq01
     ports:
     - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
   web:
     build: 
-      context: web/
+      context: ./web
+    image: kubesahar/vproweb
+    container_name: vproweb
     ports:
       - "80:80"
-    volumes:
-      - webdatavolume:/templates:/etc/nginx/templates
+
 volumes:
-  dbdatavolume:
-  webdatavolume:
+  dbdatavolume: {}
+  vproappdata: {}
