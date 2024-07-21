@@ -1,5 +1,5 @@
 services:
-  app:
+  vproapp:
     build: 
       context: ./app
     image: kubesahar/vproapp
@@ -9,11 +9,11 @@ services:
     volumes:
       - vproappdata:/usr/local/tomcat/webapps
 
-  mysqlDB:
+  vprodb:
     build: 
        context: ./db
     image: kubesahar/vprodb
-    container_name: db01
+    container_name: vprodb
     ports:
     - "3306:3306"
     environment:
@@ -21,15 +21,15 @@ services:
     volumes:
     - dbdatavolume:/var/lib/mysql
 
-  memcached:
+  vprocache01:
     image: memcached
-    container_name: mc01
+    container_name: vprocache01
     ports:
     - "11211:11211"
 
-  rabbitMQ:
+  vpromq01:
     image: rabbitmq
-    container_name: rmq01
+    container_name: vpromq01
     ports:
     - "15672:15672"
     environment:
