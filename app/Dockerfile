@@ -1,7 +1,8 @@
 FROM openjdk:11 AS base_image
 RUN apt update && apt install maven -y
-RUN git clone -b containers https://github.com/hkhcoder/vprofile-project.git
-RUN cd vprofile-project && mvn install
+RUN git clone https://github.com/hkhcoder/vprofile-project.git
+#RUN cd vprofile-project && mvn install
+RUN cd vprofile-project && git checkout docker &&  mvn install 
 
 FROM tomcat:9-jre11
 RUN rm -rf /usr/local/tomcat/webapps/*
@@ -9,3 +10,4 @@ COPY --from=base_image vprofile-project/target/vprofile-v2.war /usr/local/tomcat
 
 EXPOSE 8080
 CMD [ "catalina.sh", "run" ]
+VOLUME /usr/local/tomcat/webapps
