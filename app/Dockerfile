@@ -1,7 +1,7 @@
 FROM openjdk:11 AS base_image
 RUN apt update && apt install maven -y
-RUN git -b containers clone https://github.com/hkhcoder/vprofile-project.git
-RUN cd vprofile-project && mvn -install
+RUN git clone -b containers https://github.com/hkhcoder/vprofile-project.git
+RUN cd vprofile-project && mvn install
 
 FROM tomcat:9-jre11
 RUN rm -rf /usr/local/tomcat/webapps/ROOT*
